@@ -1,0 +1,29 @@
+from google_images_download import google_images_download
+
+#import ssl
+#ssl._create_default_https_context = ssl.create_unverified_context
+
+def imageCrawling(keyword, dir):
+    response = google_images_download.googleimagesdownload()
+
+    arguments={
+        "keywords":keyword,
+        "limit":10,
+        "print_urls":True,
+        "no_directory":True,
+        'output_directory':dir
+    }
+    paths = response.download(arguments)
+    print(paths)
+
+imageCrawling('Dracaena Marginata','Users/normal/')
+
+import os
+
+def changeName(path):
+    i = 1
+    for filename in os.listdir(path):
+        os.rename(path+filename, path+str(i)+'.jpg')
+        i+=1
+
+changeName('Users/normal/')
